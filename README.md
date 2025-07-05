@@ -1,2 +1,2 @@
 # cintel-02-data
-2.1 Assignment
+Project 2 Assignment
