@@ -34,7 +34,7 @@ with ui.sidebar(open="open"):
     ui.hr()
     ui.a("GitHub", href="https://github.com/JfromNWMS/cintel-02-data", target="_blank")
 
-@reactive.calc # Automatically caches results of penguins_df() in Python, no need for '|> bindCache(df, key)' like R
+@reactive.calc 
 def penguins_df():
     species_list = input.selected_species_list()
     return load_penguins().query("species in @species_list")
@@ -100,6 +100,3 @@ with ui.card(full_screen=True, class_="card-with-shadow"):
             hover_data = 'island'
         )
         return px_scatter
-
-
-    
