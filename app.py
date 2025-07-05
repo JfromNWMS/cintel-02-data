@@ -4,7 +4,6 @@ from shinywidgets import render_plotly
 from shiny import reactive
 import seaborn as sns
 from palmerpenguins import load_penguins
-from random import choice
 
 continuous_variables = load_penguins().select_dtypes(include=float).columns.to_list()
 
@@ -27,8 +26,8 @@ with ui.sidebar(open="open"):
         inline=True,
     )
     ui.input_selectize(
-        "selected_attribute_px",
-        "Plotly y-axis Attribute",
+        "selected_attribute_y_scatter",
+        "Scatterplot y-axis Attribute",
         continuous_variables[::-1]
     )
     ui.hr()
@@ -88,15 +87,15 @@ with ui.card(full_screen=True, class_="card-with-shadow"):
 
     @render_plotly
     def plotly_scatterplot():
-        random_variable = choice(
-            [name for name in continuous_variables if name != input.selected_attribute()]
-        )
         px_scatter = px.scatter(
             data_frame = penguins_df(),
             x = input.selected_attribute(),
-            y = input.selected_attribute_px(),
+            y = input.selected_attribute_y_scatter(),
             color = 'species',
             symbol = 'sex',
             hover_data = 'island'
         )
         return px_scatter
+
+
+    
